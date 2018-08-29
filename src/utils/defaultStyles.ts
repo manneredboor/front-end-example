@@ -1,5 +1,4 @@
 import { injectGlobal } from 'styled-components'
-import { colors } from 'utils/styles'
 
 injectGlobal`
   * {
@@ -17,11 +16,11 @@ injectGlobal`
 
   body {
     font-size: 14px;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: "RobotoDraft", "Roboto", "Helvetica Neue, Helvetica, Arial", sans-serif;
     line-height: 1.5;
-    color: ${colors.text};
+    color: #333;
     -webkit-text-size-adjust: 100%;
-    background-color: ${colors.bg};
+    background-color: #f7f7f7;
   }
 
   html,
@@ -68,7 +67,6 @@ injectGlobal`
     outline: none;
     font: inherit;
     -webkit-font-smoothing: inherit;
-    -webkit-appearance: none;
   }
 
   input, textarea, button, select, label, a {
@@ -78,10 +76,5 @@ injectGlobal`
   img, embed, iframe, object, audio, video {
     max-width: 100%;
     height: auto;
-  }
-
-  a {
-    color: ${colors.brand};
-    text-decoration: none;
   }
 `

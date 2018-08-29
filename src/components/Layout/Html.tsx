@@ -15,7 +15,6 @@ export function Html({
   scripts = [],
   styleEl,
 }: HtmlProps) {
-  // prettier-ignore
   return (
     <html lang="en">
       <head>
@@ -26,7 +25,7 @@ export function Html({
         <meta name="msapplication-tap-highlight" content="no" />
         <meta name="og:type" content="website" />
         {styleEl}
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=cyrillic-ext" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&amp;subset=cyrillic" rel="stylesheet" />
       </head>
       <body>
         <div id="root" dangerouslySetInnerHTML={{ __html: markup }} />
