@@ -57,7 +57,7 @@ export class MoviesTable extends React.PureComponent<
   constructor(props: MoviesTableProps) {
     super(props)
     this.state = {
-      currPage: 0,
+      currPage: 1,
       filter: '',
       genre: '',
       sortBy: 0,
@@ -93,8 +93,8 @@ export class MoviesTable extends React.PureComponent<
 
     const filteredMovies = this.getFilteredMovies()
     const pagedMovies = filteredMovies.slice(
-      currPage * PER_PAGE,
-      currPage * PER_PAGE + PER_PAGE,
+      (currPage - 1) * PER_PAGE,
+      (currPage - 1) * PER_PAGE + PER_PAGE,
     )
 
     const pagesCount = Math.ceil(filteredMovies.length / PER_PAGE)

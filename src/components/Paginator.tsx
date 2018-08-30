@@ -12,11 +12,15 @@ interface PageProps {
 }
 const Page = styled.div`
   margin: 0 10px;
-  padding: 0.5em 1em;
+  padding: 0.5em 0;
   border-radius: 3px;
   cursor: pointer;
   user-select: none;
   background-color: #e7e7e7;
+  font-size: 12px;
+  font-weight: bold;
+  width: 40px;
+  text-align: center;
 
   ${(p: PageProps) =>
     p.isCurrent &&
@@ -35,7 +39,8 @@ const Page = styled.div`
     `};
 `
 
-const PAGES_SPREAD = 7
+const PAGES_SPREAD = 6
+const SPREAD_HALF = Math.ceil((PAGES_SPREAD - 1) / 2)
 
 interface PaginatorProps {
   current: number
@@ -43,50 +48,76 @@ interface PaginatorProps {
   total: number
 }
 
-export const Paginator = ({ current, onChange, total }: PaginatorProps) =>
-  total > 1 ? (
-    <Pages>
-      {/* First */}
-      <Page isDisabled={current === 0} onClick={() => onChange(0)}>
-        {'<<'}
-      </Page>
+export const Paginator = ({ current, onChange, total }: PaginatorProps) => {
+  const showPrevMore = current > PAGES_SPREAD - SPREAD_HALF
+  const showNextMore = current < total - SPREAD_HALF
 
+  let pages = [...Array(total)].map((_, i) => i)
+
+  const startAt =
+    showPrevMore && !showNextMore
+      ? total - (PAGES_SPREAD - 2)
+      : showPrevMore && showNextMore
+        ? current - SPREAD_HALF + 1
+        : 2
+
+  const endAt =
+    !showPrevMore && showNextMore
+      ? PAGES_SPREAD
+      : showPrevMore && showNextMore
+        ? current + SPREAD_HALF
+        : total
+
+  pages = pages.slice(startAt, endAt)
+
+  return total > 1 ? (
+    <Pages>
       {/* Prev */}
       <Page
-        isDisabled={current === 0}
-        onClick={() => onChange(Math.max(0, current - 1))}
+        isDisabled={current === 1}
+        onClick={() => onChange(Math.max(1, current - 1))}
       >
-        {'<'}
+        {'⟨'}
       </Page>
 
+      {/* First */}
+      <Page isCurrent={current === 1} onClick={() => onChange(1)}>
+        1
+      </Page>
+
+      {/* More Left */}
+      {showPrevMore && (
+        <Page onClick={() => onChange(current - SPREAD_HALF)}>{'⟨⟨'}</Page>
+      )}
+
       {/* Pages */}
-      {[...Array(PAGES_SPREAD)].map((_, i) => {
-        const page = i + current - Math.floor(PAGES_SPREAD / 2)
-        return page >= 0 && page < total ? (
-          <Page
-            isCurrent={current === page}
-            onClick={() => onChange(page)}
-            key={i}
-          >
-            {page + 1}
-          </Page>
-        ) : null
-      })}
+      {pages.map((page, i) => (
+        <Page
+          isCurrent={current === page}
+          key={`${page}${i}`}
+          onClick={() => onChange(page)}
+        >
+          {page}
+        </Page>
+      ))}
+
+      {/* More Right */}
+      {showNextMore && (
+        <Page onClick={() => onChange(current + SPREAD_HALF)}>{'⟩⟩'}</Page>
+      )}
+
+      {/* Last */}
+      <Page isCurrent={current === total} onClick={() => onChange(total)}>
+        {total}
+      </Page>
 
       {/* Next */}
       <Page
-        isDisabled={current === total - 1}
-        onClick={() => onChange(Math.min(current + 1, total - 1))}
+        isDisabled={current === total}
+        onClick={() => onChange(Math.min(current + 1, total))}
       >
-        {'>'}
-      </Page>
-
-      {/* Last */}
-      <Page
-        isDisabled={current === total - 1}
-        onClick={() => onChange(total - 1)}
-      >
-        {'>>'}
+        {'⟩'}
       </Page>
     </Pages>
   ) : null
+}
