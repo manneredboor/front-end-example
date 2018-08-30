@@ -15,11 +15,13 @@ export const Table = styled.table`
   background-color: #fff;
   border: 0;
   border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;
 
   & th,
   & td {
     text-align: left;
-    padding: 1.6em;
+    padding: 1.4em;
     vertical-align: top;
     border: inherit;
   }

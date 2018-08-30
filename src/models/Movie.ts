@@ -1,4 +1,5 @@
 export interface Movie {
+  [key: string]: any
   actors: string[]
   description: string
   director: string

@@ -8,6 +8,7 @@ injectGlobal`
 
   html {
     box-sizing: border-box;
+    overflow-y: scroll;
   }
 
   *, *:before, *:after {
