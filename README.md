@@ -1,5 +1,9 @@
 ###### _POWERED WITH [`@gnarlycode/react-app-tools`](https://github.com/gnarlycode/react-app-tools) && [`@gnarlycode/create-gnarly-app`](https://github.com/gnarlycode/create-gnarly-app)_
 
+# WHAT IS IT
+
+This example app shows how I'm working with REACT+REDUX+TYPESCRIPT+STYLED-COMPONENTS
+
 # HOW TO RUN
 
 ```sh
@@ -39,7 +43,7 @@ npm start
    │  ├─ 📄 reducer           ℹ️ root reducer
    │  ├─ 📄 store             ℹ️ redux store creator
    │  └─ 📁 modules
-   │     └─ 📄 movies         ℹ️ movies reducer
+   │     └─ 📄 movies         ℹ️ movies data module
    │
    ├─ 📁 entries              ℹ️ app entries
    │  ├─ 📄 client
