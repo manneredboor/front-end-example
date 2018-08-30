@@ -1,15 +1,11 @@
-import { Reducer, combineReducers } from 'redux'
+import { combineReducers } from 'redux'
+import { State } from 'models/State'
+import { moviesReducer, moviesInitState } from './modules/movies'
 
-interface DataState {}
-
-export interface State {
-  data: DataState
+export const initState = {
+  movies: moviesInitState,
 }
 
-const dataReducer: Reducer<DataState> = (state = {}, action) => {
-  return state
-}
-
-export const reducer: Reducer<State> = combineReducers<State>({
-  data: dataReducer,
+export const reducer = combineReducers<State>({
+  movies: moviesReducer,
 })

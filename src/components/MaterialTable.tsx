@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 interface TableProps {
   isBordered?: boolean
   isCondensed?: boolean
+  isHoverable?: boolean
   isResponsive?: boolean
   isStriped?: boolean
 }
@@ -33,29 +34,35 @@ export const Table = styled.table`
     vertical-align: bottom;
   }
 
-  ${(p: TableProps) => p.isBordered && css`
-    & thead tr {
-      border-bottom-width: 2px;
-    }
+  ${(p: TableProps) =>
+    p.isBordered &&
+    css`
+      & thead tr {
+        border-bottom-width: 2px;
+      }
 
-    & tr {
-      border-bottom: 1px solid #e1e1e1;
-    }
-  `}
+      & tr {
+        border-bottom: 1px solid #e1e1e1;
+      }
+    `}
 
-  ${(p: TableProps) => p.isStriped && css`
-    & tbody tr:nth-child(odd) {
-      background-color: #f6f6f6;
-    }
-  `}
+  ${(p: TableProps) =>
+    p.isStriped &&
+    css`
+      & tbody tr:nth-child(odd) {
+        background-color: #f6f6f6;
+      }
+    `}
 
-  ${(p: TableProps) => p.isCondensed && css`
-    & tr,
-    & th,
-    & td {
-      padding: 0.8em;
-    }
-  `}
+  ${(p: TableProps) =>
+    p.isCondensed &&
+    css`
+      & tr,
+      & th,
+      & td {
+        padding: 0.8em;
+      }
+    `}
 
   & caption + thead tr:first-child,
   & colgroup + thead tr:first-child,
@@ -79,46 +86,53 @@ export const Table = styled.table`
     margin: 1em 0;
   }
 
-  & tbody tr {
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-  }
 
-  & tbody tr:hover {
-    background-color: #e7e7e7;
-  }
-
-  ${(p: TableProps) => p.isResponsive && css`
-    @media screen and (max-width: 768px) {
-      & {
-        margin-bottom: 0;
-        background-color: transparent;
-      }
-      & thead,
-      & tfoot {
-        display: none;
-      }
-      & tbody {
-        display: block;
-      }
+  ${(p: TableProps) =>
+    p.isHoverable &&
+    css`
       & tbody tr {
-        display: block;
-        border: 1px solid #e1e1e1;
-        border-radius: 2px;
-        margin-bottom: 1.6em;
+        transition: background-color 0.3s ease, opacity 0.3s ease;
       }
-      & tbody tr td {
-        background-color: #fff;
-        display: block;
-        vertical-align: middle;
-        text-align: right;
+
+      & tbody tr:hover {
+        background-color: #e7e7e7;
       }
-      & tbody tr td[data-title]:before {
-        content: attr(data-title);
-        float: left;
-        font-size: inherit;
-        font-weight: 400;
-        color: #3f3f3f;
+    `}
+
+  ${(p: TableProps) =>
+    p.isResponsive &&
+    css`
+      @media screen and (max-width: 768px) {
+        & {
+          margin-bottom: 0;
+          background-color: transparent;
+        }
+        & thead,
+        & tfoot {
+          display: none;
+        }
+        & tbody {
+          display: block;
+        }
+        & tbody tr {
+          display: block;
+          border: 1px solid #e1e1e1;
+          border-radius: 2px;
+          margin-bottom: 1.6em;
+        }
+        & tbody tr td {
+          background-color: #fff;
+          display: block;
+          vertical-align: middle;
+          text-align: right;
+        }
+        & tbody tr td[data-title]:before {
+          content: attr(data-title);
+          float: left;
+          font-size: inherit;
+          font-weight: 400;
+          color: #3f3f3f;
+        }
       }
-    }
-  `}
+    `}
 `

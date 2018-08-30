@@ -7,11 +7,14 @@ import { makeStore } from 'data/store'
 import { Html } from 'components/Layout/Html'
 import { App } from 'components/App'
 import unwrapStats from '@gnarlycode/react-app-tools/helpers/unwrap-stats'
+import { fetchMoviesIfNeeded } from 'data/modules/movies'
 
-export default (allstats: any): RequestHandler => (req, res, next) => {
+export default (allstats: any): RequestHandler => async (req, res, next) => {
   const { scripts } = unwrapStats(allstats)
   const sheet = new ServerStyleSheet()
-  const store = makeStore({})
+  const store = makeStore()
+
+  await store.dispatch(fetchMoviesIfNeeded())
 
   // Render App
   const markup = renderToString(

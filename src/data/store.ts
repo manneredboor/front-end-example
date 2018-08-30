@@ -1,17 +1,15 @@
-import { applyMiddleware, compose, createStore, Middleware } from 'redux'
-import { reducer } from 'data/reducer'
+import { applyMiddleware, compose, createStore } from 'redux'
+import thunk, { ThunkMiddleware, ThunkDispatch } from 'redux-thunk'
+import { reducer, initState } from 'data/reducer'
+import { State } from 'models/State'
 import * as config from 'config'
 import isBrowser from 'is-in-browser'
 
-interface ConfigureStoreArgs<S extends object> {
-  init?: S
-}
+type ComposeType = <R>(a: R) => R
 
-export const makeStore = <S extends object>(args: ConfigureStoreArgs<S>) => {
-  const { init = {} } = args
-
+export const makeStore = (init: State = initState) => {
   // Middlewares
-  const middlewares: Middleware[] = []
+  const middlewares = [thunk as ThunkMiddleware<State>]
 
   // Dev Middlewares
   if (config.isDev && isBrowser) {
@@ -24,13 +22,17 @@ export const makeStore = <S extends object>(args: ConfigureStoreArgs<S>) => {
   const composeEnhancers =
     (config.isDev &&
       typeof window === 'object' &&
-      (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+      ((window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ as ComposeType)) ||
     compose
 
   // Create and return Store
   return createStore(
     reducer,
     init,
-    composeEnhancers(applyMiddleware(...middlewares)),
+    composeEnhancers(
+      applyMiddleware<ThunkDispatch<State, undefined, any>, State>(
+        ...middlewares,
+      ),
+    ),
   )
 }
