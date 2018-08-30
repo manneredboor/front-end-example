@@ -121,7 +121,7 @@ export class MoviesTable extends React.PureComponent<
                     column.isSortable
                       ? () =>
                           this.setState({
-                            currPage: 0,
+                            currPage: 1,
                             sortBy: i,
                             sortDir: sortBy === i ? sortDir * -1 : 1,
                           })
@@ -140,7 +140,7 @@ export class MoviesTable extends React.PureComponent<
                   type="text"
                   value={filter}
                   onChange={e =>
-                    this.setState({ filter: e.target.value, currPage: 0 })
+                    this.setState({ filter: e.target.value, currPage: 1 })
                   }
                 />
               </th>
@@ -148,7 +148,7 @@ export class MoviesTable extends React.PureComponent<
                 <Select
                   defaultValue=""
                   onChange={e =>
-                    this.setState({ genre: e.target.value, currPage: 0 })
+                    this.setState({ genre: e.target.value, currPage: 1 })
                   }
                 >
                   <option value="">No genre selected</option>

@@ -7,7 +7,7 @@ module.exports = {
   // baseUrl: '/base-url',
 
   // For static renderer, used when you run `npm run build-static` or `build-all`
-  routerConfig: './src/routes',
+  // routerConfig: './src/routes',
 
   // Serve static with express (do not enable if static served with nginx for example)
   serveStatic: true,
