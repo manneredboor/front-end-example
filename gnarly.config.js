@@ -4,7 +4,7 @@ module.exports = {
   port: 8080,
 
   // Url prefix
-  // baseUrl: '/base-url',
+  baseUrl: '/universal-app-example',
 
   // For static renderer, used when you run `npm run build-static` or `build-all`
   // routerConfig: './src/routes',
